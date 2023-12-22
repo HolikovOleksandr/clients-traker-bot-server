@@ -1,35 +1,28 @@
-require("dotenv").config();
-const express = require("express");
-const mongoose = require("mongoose");
+import express from "express";
+import dotenv from "dotenv";
+import clientRoute from "./routes/clients-route.js";
+import mongoose from "mongoose";
 
 const app = express();
-const port = process.env.PORT;
+dotenv.config();
 
-//====R=O=U=T=E=S====
+app.use("api/clients", clientRoute);
 
-app.get("/", (req, res) => {
-  res.send("Hello Node API");
-});
-
-app.post("/client", (req, res) => {
-  console.log(req.body);
-  res.send(req.body);
-});
-
-//===================
-
-async function start() {
-  app.listen(port, () => {
-    console.log("API runningn on port", port);
-  });
-}
-
-mongoose
-  .connect(process.env.MONGODB_STRING)
-  .then(() => {
-    console.log("Connected to database");
-    start();
-  })
-  .catch((error) => {
+const dbConnection = async () => {
+  try {
+    await mongoose.connect(process.env.MONGODB_STRING);
+    console.log("Conneted to database");
+  } catch (error) {
     console.error(error);
-  });
+    throw error;
+  }
+};
+
+mongoose.connection.on("disconnected", () => {
+  console.log("MongoDB disconnectrd!");
+});
+
+app.listen(process.env.PORT || 3000, () => {
+  dbConnection();
+  console.log("Server was runningn");
+});
