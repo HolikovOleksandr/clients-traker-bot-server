@@ -1,6 +1,6 @@
-const mongoose = require("mongoose");
+import { Schema, model } from "mongoose";
 
-const clientSchema = mongoose.Schema({
+const clientSchema = Schema({
   name: {
     type: String,
     require: [true, "Введіть им`я кліента"],
@@ -11,7 +11,7 @@ const clientSchema = mongoose.Schema({
   },
   sessions: [
     {
-      type: mongoose.Schema.Types.ObjectId,
+      type: Schema.Types.ObjectId,
       ref: "Session",
       require: false,
       default: [],
@@ -19,5 +19,6 @@ const clientSchema = mongoose.Schema({
   ],
 });
 
-const Client = mongoose.model("Client", clientSchema);
-module.exports = Client;
+const Client = model("Client", clientSchema);
+export default Client;
+

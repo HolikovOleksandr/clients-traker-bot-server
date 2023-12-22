@@ -4,9 +4,11 @@ import clientRoute from "./routes/clients-route.js";
 import mongoose from "mongoose";
 
 const app = express();
+const port = process.env.PORT || 3000;
 dotenv.config();
 
-app.use("api/clients", clientRoute);
+app.use(express.json());
+app.use("/api/clients", clientRoute);
 
 const dbConnection = async () => {
   try {
@@ -22,7 +24,7 @@ mongoose.connection.on("disconnected", () => {
   console.log("MongoDB disconnectrd!");
 });
 
-app.listen(process.env.PORT || 3000, () => {
+app.listen(port, () => {
   dbConnection();
-  console.log("Server was runningn");
+  console.log(`Server was runningn on ${port}`);
 });
