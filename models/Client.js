@@ -9,16 +9,8 @@ const clientSchema = Schema({
     type: String,
     require: [true, "Введіть прізвище кліента"],
   },
-  sessions: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "Session",
-      require: false,
-      default: [],
-    },
-  ],
+  sessions: Array,
 });
 
 const Client = model("Client", clientSchema);
 export default Client;
-

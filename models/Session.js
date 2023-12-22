@@ -6,15 +6,17 @@ const sessionSchema = mongoose.Schema({
     required: [true, "Який буде масаж?"],
     default: "Релакс спина",
   },
+  duration: {
+    type: String,
+    required: [true, "Скіко триватиме?"],
+  },
   scheduledDate: {
-    type: Date,
+    type: String,
     required: [true, "Якого числа?"],
-    default: Date.now,
   },
   scheduledTime: {
     type: String,
     required: [true, "О котрій?"],
-    default: "13:30",
   },
 });
 
