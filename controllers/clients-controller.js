@@ -26,7 +26,8 @@ export const updateClient = async (req, res) => {
       res.status(404).json({ message: "Здаєтся такого клієнта нема..." });
     }
 
-    res.status(200).json(client);
+    const updatedClient = await Client.findById(id);
+    res.status(200).json(updatedClient);
   } catch (error) {
     s;
     console.error(error);

@@ -1,6 +1,6 @@
-const mongoose = require("mongoose");
+import { Schema, model } from "mongoose";
 
-const sessionSchema = mongoose.Schema({
+const sessionSchema = Schema({
   massage: {
     type: String,
     required: [true, "Який буде масаж?"],
@@ -20,5 +20,5 @@ const sessionSchema = mongoose.Schema({
   },
 });
 
-const Session = mongoose.model("Session", sessionSchema);
-module.exports = Session;
+const Session = model("Session", sessionSchema);
+export default Session;

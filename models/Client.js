@@ -9,6 +9,10 @@ const clientSchema = Schema({
     type: String,
     require: [true, "Введіть прізвище кліента"],
   },
+  phone: {
+    type: String,
+    require: [true, "Та номер телефону"],
+  },
   sessions: Array,
 });
 
